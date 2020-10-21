@@ -14,7 +14,7 @@ BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno
     BUFF* b = malloc(sizeof(BUFF));
 
     if(*retorno == NULL)
-        *retorno = fopen(arquivo_entrada, "r");
+        *retorno = fopen(arquivo_entrada, "rb");
 
     b->iv = iv_Ler_Novo(N_registros, retorno);
     b->pos = 0;
@@ -31,6 +31,7 @@ ITEM_VENDA iv_Consumir(BUFF* buffer){
     if(buffer->pos == buffer->tam){
         free(buffer->iv);
         buffer->iv = iv_Ler_Novo(buffer->tam, buffer->arq);
+        buffer->pos = 0;
     }
 
     return buffer->iv[buffer->pos++];
@@ -40,7 +41,8 @@ int iv_Vazio(FILE** arq){
     return feof(*arq);
 }
 
-void iv_Destruir(FILE** retorno, ITEM_VENDA* registros){
-    fclose(*retorno);
-    free(registros);
+void iv_Destruir(BUFF* buffer){
+    fclose(buffer->iv);
+    free(*buffer->arq);
+    free(buffer);
 }
