@@ -27,8 +27,8 @@ void iv_Inserir(BUFF* buffer, ITEM_VENDA registro){
 void iv_Despejar(BUFF* buffer){
     fwrite(buffer->iv, sizeof(ITEM_VENDA), buffer->tam, *buffer->arq);
     free(buffer->iv);
-        buffer->iv = iv_Criar(buffer->tam);
-        buffer->tam = 0;
+    buffer->iv = iv_Criar(buffer->tam);
+    buffer->tam = 0;
 }
 
 void iv_Destruir_S(BUFF* buffer){
