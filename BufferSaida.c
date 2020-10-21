@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include "BufferSaida.h"
 
-ITEM_VENDA* iv_Criar(unsigned int N_registros){
+static ITEM_VENDA* iv_Criar(unsigned int N_registros){
     ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
 }
 
@@ -19,7 +19,7 @@ void iv_Inserir(BUFF* buffer, ITEM_VENDA registro){
     buffer->iv[buffer->pos++] = registro;
 
     if(buffer->pos == buffer->tam){
-        iv_Despejar(buffer);   
+        iv_Despejar(buffer);
     }
 
 }
