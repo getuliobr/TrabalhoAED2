@@ -6,7 +6,12 @@
 
 ITEM_VENDA* iv_Criar_S(char* arquivo_saida, unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
-    *retorno = fopen(arquivo_saida, "a+");
+    if(*retorno == NULL)
+        *retorno = fopen(arquivo_saida, "a+");
 
     return iv;
+}
+
+void iv_Inserir(char* arquivo, BUFF* buffer, ITEM_VENDA registro){
+
 }

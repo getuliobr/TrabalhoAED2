@@ -9,8 +9,15 @@ typedef struct ITEM_VENDA{
     char obs[1008];
 }ITEM_VENDA;
 
-ITEM_VENDA* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno);
-ITEM_VENDA iv_Proximo(ITEM_VENDA* buffer);
-ITEM_VENDA iv_Consumir(ITEM_VENDA* buffer);
-int iv_Vazio(char* arquivo_entrada);
+typedef struct BUFF{
+    ITEM_VENDA* iv;
+    int tam;
+    int pos;
+    FILE** arq;
+}BUFF;
+
+BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno);
+ITEM_VENDA iv_Proximo(BUFF* buffer);
+ITEM_VENDA iv_Consumir(BUFF* buffer);
+int iv_Vazio(FILE** arq);
 void iv_Destruir(FILE** retorno, ITEM_VENDA* registros);
