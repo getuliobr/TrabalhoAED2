@@ -10,9 +10,14 @@ static ITEM_VENDA* iv_Criar(unsigned int N_registros){
 BUFF* iv_Criar_S(char* arquivo_saida, unsigned int N_registros, FILE** retorno){
     
     if(*retorno == NULL)
-        *retorno = fopen(arquivo_saida, "ab+");
-
-    return iv_Criar(N_registros);
+        *retorno = fopen(arquivo_saida, "wb+");
+    BUFF* buffer = malloc(sizeof(BUFF));
+    buffer->arq = retorno;
+    buffer->tam = N_registros;
+    buffer->pos = 0;
+    buffer->iv = iv_Criar(N_registros);
+    
+    return buffer;
 }
 
 void iv_Inserir(BUFF* buffer, ITEM_VENDA registro){

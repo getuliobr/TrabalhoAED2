@@ -3,5 +3,5 @@
 
 int main(int argc, char** argv){
     printf("sizeof(ITEM_VENDA) = %ld\n", sizeof(ITEM_VENDA));
-    gerar_array_iv("teste.dat", 1572864, 42);
+    gerar_array_iv("teste.dat", 20, 42);
 }
