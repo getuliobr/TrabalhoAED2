@@ -18,14 +18,16 @@ int main(){
    */
     FILE* arq_principal = NULL;
     char** arq_ordenados = malloc(sizeof(char*)*1);
-    do{
+    while(1){
         BUFF* entrada = iv_Criar_E("teste.dat", 10, &arq_principal);
+        if(feof(arq_principal)) break;
         /*qsort*/
         char* arqsaida = calloc(14,sizeof(char)); // Cria nome do arquivo de saida
         strcpy(arqsaida, "arqsaida");            // ^
         char x = i+'0';                         // ^
         strncat(arqsaida, &x, 1);                   
         strcat(arqsaida, ".txt");              // ^
+
         FILE* novo = NULL;                             // Referencia novo ponteiro de file
         BUFF* saida = iv_Criar_S(arqsaida, 10, &novo); // Cria um BUFFER de saida com o ponteiro e nome criados
         arq_ordenados[i] =  arqsaida;
@@ -37,7 +39,7 @@ int main(){
         iv_Despejar(saida); // Despeja
 
         iv_Destruir_S(saida);
-    }while(!feof(arq_principal));
+    };
    /*
     2ª Parte:
     Criar um novo arquivo e vai colocando de N em N MB fazendo o mergeSort
