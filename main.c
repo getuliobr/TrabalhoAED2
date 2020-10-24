@@ -8,6 +8,7 @@
 
 int main(){
     int i = 0;
+    int j, k;
     /*
     1ª Parte:
     Abrir um arquivo, ordernar de X em Xmb e criar um vários arquivos menores de Xmb
@@ -47,25 +48,30 @@ int main(){
     Criar um novo arquivo e vai colocando de N em N MB fazendo o mergeSort
     Obs: O Buffer vai se atualizando sozinho
     */
-    FILE* arq_saida_principal = NULL;
-    BUFF* arq_saida_p = iv_Criar_S("teste.txt", 10, &arq_saida_principal);
+    FILE* arq_saida_principal = NULL;                                           // FILE do arquivo de saida principal(Todos os elementos ordenados)
+    BUFF* arq_saida_p = iv_Criar_S("teste.txt", 10, &arq_saida_principal);      // Criação do Buffer de saida principal
 
-    FILE** arq_entrada_ordenados = malloc(sizeof(FILE*)*arq_ordenados_count);
-    BUFF* arq_entrada_ord = malloc(sizeof(BUFF*)*arq_ordenados_count);
-    while(1){
-        for( i = 0; i < arq_ordenados_count; i++){
-            arq_entrada_ordenados[i] = NULL;
-            arq_entrada_ord = iv_Criar_E(arq_ordenados[i], 10, &arq_entrada_ordenados[i]);
-        }
-        int x;
-        for( i = 0; i < arq_ordenados_count; i++){
-            if(i == 0){
-                x = feof(arq_entrada_ordenados[i]);
-                continue;
-            }
-            x = x && feof(arq_entrada_ordenados[i]);
-        }
-        if(x)
-            break;
+    FILE** arq_entrada_ordenados = malloc(sizeof(FILE*)*arq_ordenados_count);   // Vetor de FILES dos arquivos já ordenados
+    BUFF** arq_entrada_ord = malloc(sizeof(BUFF*)*arq_ordenados_count);         // Vetor de Buffers dos arquivos já ordenados
+    for( i = 0; i < arq_ordenados_count; i++){                                              // Abertura de arquivos ordenados
+        arq_entrada_ordenados[i] = NULL;                                                    // ^
+        arq_entrada_ord[i] = iv_Criar_E(arq_ordenados[i], 10, &arq_entrada_ordenados[i]);   // ^
     }
+
+    for(i = 0; i < 20/*tamanho de elementos no arquivo*/; i++){ // Coloca os itens no arquivo
+        int menor = 0;                                          // Guarda o maior id de N Buffer lidos 
+        ITEM_VENDA menor_iv = iv_Proximo(arq_entrada_ord[0]);   // ^
+        for(k = 1; k < arq_ordenados_count; k++){               // ^
+            ITEM_VENDA a = iv_Proximo(arq_entrada_ord[k]);      // ^
+            if(a.id < menor_iv.id){                             // ^
+                menor = k;                                      // ^
+                menor_iv = a;                                   // ^
+            }                                                   // ^
+        }                                                       // ^
+        iv_Inserir(arq_saida_p, iv_Consumir(arq_entrada_ord[menor]));
+    }
+    iv_Destruir_S(arq_saida_p); // Destruição da Saida
+
+    for(i = 0; i < arq_ordenados_count; i++)    // Destruição dos arquivos de entrada
+        iv_Destruir_E(arq_entrada_ord[i]);        // ^
 }
