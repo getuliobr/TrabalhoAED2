@@ -17,7 +17,8 @@ int main(){
     Obs: Antes de salvar já faz a ordenação
     */
     FILE* arq_principal = fopen("teste.dat", "rb+");
-    int qtdeElementos = fsize(arq_principal) / sizeof(ITEM_VENDA);
+    int tamanhoDoArquivo = fsize(arq_principal);
+    int qtdeElementos = tamanhoDoArquivo / sizeof(ITEM_VENDA);
     int quantidadeArquivos = qtdeElementos / 10;
     fclose(arq_principal);
     arq_principal = NULL;
