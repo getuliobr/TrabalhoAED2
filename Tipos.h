@@ -12,6 +12,7 @@ typedef struct ITEM_VENDA {
 
 typedef struct BUFF{
     ITEM_VENDA* iv;
+    int totalIv;
     int tam;
     int pos;
     FILE** arq;

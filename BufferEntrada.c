@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "BufferEntrada.h"
+#include "Utils.h"
 
 static ITEM_VENDA* iv_Ler_Novo(unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = calloc(N_registros,sizeof(ITEM_VENDA));
@@ -31,6 +32,9 @@ BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno
     // fseek(*retorno, posi, SEEK_SET);
     // if(N_registros > (posi-posf)/1024)
     //     N_registros = (posi-posf)/1024;
+    int fileSize = fsize(*retorno);
+    if(fileSize == -1) printf("ERRO AO ABRIR ARQUIVO: %s\n", arquivo_entrada);
+    b->totalIv = fileSize / 1024;
 
     b->iv = iv_Ler_Novo(N_registros, retorno);
     b->pos = 0;
@@ -44,17 +48,16 @@ ITEM_VENDA iv_Proximo(BUFF* buffer){
 }
 
 ITEM_VENDA iv_Consumir(BUFF* buffer){
-    if(buffer->pos == buffer->tam){
+    if(buffer->pos & ((buffer->pos % buffer->tam) == 0)){
         free(buffer->iv);   
         buffer->iv = iv_Ler_Novo(buffer->tam, buffer->arq);
-        buffer->pos = 0;
     }
 
     return buffer->iv[buffer->pos++];
 }
 
-int iv_Vazio(FILE** arq){
-    return feof(*arq);
+int iv_Vazio(BUFF* buffer){
+    return (int)(buffer->totalIv == buffer->pos);
 }
 
 void iv_Destruir_E(BUFF* buffer){

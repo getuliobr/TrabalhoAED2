@@ -1,7 +1,10 @@
-all: BufferEntrada BufferSaida
+all: BufferEntrada BufferSaida Utils
 	gcc -g main.c -o main *.o
 	rm *.o
 	
+Utils:
+	gcc -g -c Utils.c
+
 BufferEntrada:
 	gcc -g -c BufferEntrada.c
 

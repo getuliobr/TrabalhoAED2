@@ -12,6 +12,7 @@ BUFF* iv_Criar_S(char* arquivo_saida, unsigned int N_registros, FILE** retorno){
     if(*retorno == NULL)
         *retorno = fopen(arquivo_saida, "wb+");
     BUFF* buffer = malloc(sizeof(BUFF));
+    buffer->totalIv = -1;
     buffer->arq = retorno;
     buffer->tam = N_registros;
     buffer->pos = 0;
