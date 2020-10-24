@@ -83,6 +83,8 @@ int main(){
     }
     iv_Destruir_S(arq_saida_p); // Destruição da Saida
 
-    for(i = 0; i < arq_ordenados_count; i++)    // Destruição dos arquivos de entrada
-        iv_Destruir_E(arq_entrada_ord[i]);        // ^
+    for(i = 0; i < arq_ordenados_count; i++){    // Destruição dos arquivos de entrada
+        iv_Destruir_E(arq_entrada_ord[i]);
+        remove(arq_ordenados[i]);
+    }        // ^
 }
