@@ -1,4 +1,4 @@
-all: BufferEntrada BufferSaida Utils
+all: BufferEntrada BufferSaida Utils ordena
 	gcc -g main.c -o main *.o
 	rm *.o
 	
@@ -13,3 +13,6 @@ BufferSaida:
 
 teste:
 	gcc teste.c -o teste
+
+ordena:
+	gcc -g -c ordena.c
