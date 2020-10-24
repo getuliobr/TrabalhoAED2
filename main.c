@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
+#include <limits.h>
 #include "BufferEntrada.h"
 #include "BufferSaida.h"
 #include "Tipos.h"
@@ -56,17 +57,18 @@ int main(){
     }
 
     for(i = 0; i < 100/*tamanho de elementos no arquivo*/; i++){ // Coloca os itens no arquivo
-        int menor = 0;                                          // Guarda o maior id de N Buffer lidos 
-        ITEM_VENDA menor_iv = iv_Proximo(arq_entrada_ord[0]);   // ^
-        for(k = 1; k < arq_ordenados_count; k++){               // ^
+        int menor;                                          // Guarda o maior id de N Buffer lidos 
+        ITEM_VENDA menor_iv;   // ^
+        menor_iv.id = 100+20;
+        for(k = 0; k < arq_ordenados_count; k++){               // ^
             ITEM_VENDA a = iv_Proximo(arq_entrada_ord[k]);      // ^
             if(a.id < menor_iv.id){                             // ^
                 menor = k;                                      // ^
                 menor_iv = a;                                   // ^
             }                                                   // ^
         }                                                       // ^
-        ITEM_VENDA saida = iv_Consumir(arq_entrada_ord[menor]);
-        iv_Inserir(arq_saida_p, saida);
+        menor_iv = iv_Consumir(arq_entrada_ord[menor]);
+        iv_Inserir(arq_saida_p, menor_iv);
     }
     iv_Destruir_S(arq_saida_p); // Destruição da Saida
 

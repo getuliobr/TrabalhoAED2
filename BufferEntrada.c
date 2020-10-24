@@ -45,7 +45,7 @@ ITEM_VENDA iv_Proximo(BUFF* buffer){
 
 ITEM_VENDA iv_Consumir(BUFF* buffer){
     if(buffer->pos == buffer->tam){
-        free(buffer->iv);
+        free(buffer->iv);   
         buffer->iv = iv_Ler_Novo(buffer->tam, buffer->arq);
         buffer->pos = 0;
     }
