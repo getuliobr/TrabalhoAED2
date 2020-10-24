@@ -4,7 +4,7 @@
 #include "BufferSaida.h"
 
 static ITEM_VENDA* iv_Criar(unsigned int N_registros){
-    ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
+    ITEM_VENDA* iv = calloc(N_registros,sizeof(ITEM_VENDA));
 }
 
 BUFF* iv_Criar_S(char* arquivo_saida, unsigned int N_registros, FILE** retorno){
@@ -33,7 +33,7 @@ void iv_Despejar(BUFF* buffer){
     fwrite(buffer->iv, sizeof(ITEM_VENDA), buffer->tam, *buffer->arq);
     free(buffer->iv);
     buffer->iv = iv_Criar(buffer->tam);
-    buffer->tam = 0;
+    buffer->pos = 0;
 }
 
 void iv_Destruir_S(BUFF* buffer){

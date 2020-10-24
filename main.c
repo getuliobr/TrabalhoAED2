@@ -14,9 +14,6 @@ int main(){
     Abrir um arquivo, ordernar de X em Xmb e criar um vários arquivos menores de Xmb
     Obs: Antes de salvar já faz a ordenação
     */
-   /*
-   
-   */
     FILE* arq_principal = NULL;
     char** arq_ordenados = malloc(sizeof(char*)*1); // Guarda nome dos arquivos já ordenados
     int arq_ordenados_count;                              // Guarda a quantidade de arquivos ordenados
@@ -58,7 +55,7 @@ int main(){
         arq_entrada_ord[i] = iv_Criar_E(arq_ordenados[i], 10, &arq_entrada_ordenados[i]);   // ^
     }
 
-    for(i = 0; i < 20/*tamanho de elementos no arquivo*/; i++){ // Coloca os itens no arquivo
+    for(i = 0; i < 100/*tamanho de elementos no arquivo*/; i++){ // Coloca os itens no arquivo
         int menor = 0;                                          // Guarda o maior id de N Buffer lidos 
         ITEM_VENDA menor_iv = iv_Proximo(arq_entrada_ord[0]);   // ^
         for(k = 1; k < arq_ordenados_count; k++){               // ^
