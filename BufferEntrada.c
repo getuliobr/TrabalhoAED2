@@ -62,3 +62,9 @@ void iv_Destruir_E(BUFF* buffer){
     fclose(*buffer->arq);
     free(buffer);
 }
+
+int compare(const void *a, const void *b){
+    ITEM_VENDA *a1 = (ITEM_VENDA*)a;
+    ITEM_VENDA *b1 = (ITEM_VENDA*)b;
+    return (a1->id - b1->id);
+}

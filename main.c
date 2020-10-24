@@ -10,8 +10,8 @@ int main(){
     int i = 0;
     /*
     1ª Parte:
-    Abrir um arquivo, ordernar de 100 em 100mb e criar um vários arquivos menores de 100mb
-    Obs: Antes de salvar já faz a ordenação, e já salva no mesmo arquivo anterior.
+    Abrir um arquivo, ordernar de X em Xmb e criar um vários arquivos menores de Xmb
+    Obs: Antes de salvar já faz a ordenação
     */
    /*
    
@@ -21,7 +21,7 @@ int main(){
     while(1){
         BUFF* entrada = iv_Criar_E("teste.dat", 10, &arq_principal);
         if(feof(arq_principal)) break;
-        /*qsort*/
+        qsort(entrada->iv, 10, sizeof(ITEM_VENDA), compare);
         char* arqsaida = calloc(14,sizeof(char)); // Cria nome do arquivo de saida
         strcpy(arqsaida, "arqsaida");            // ^
         char x = i+'0';                         // ^
