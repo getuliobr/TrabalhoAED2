@@ -68,7 +68,8 @@ int main(){
                 menor_iv = a;                                   // ^
             }                                                   // ^
         }                                                       // ^
-        iv_Inserir(arq_saida_p, iv_Consumir(arq_entrada_ord[menor]));
+        ITEM_VENDA saida = iv_Consumir(arq_entrada_ord[menor]);
+        iv_Inserir(arq_saida_p, saida);
     }
     iv_Destruir_S(arq_saida_p); // Destruição da Saida
 
