@@ -4,7 +4,7 @@
 #include "BufferSaida.h"
 
 static ITEM_VENDA* iv_Criar(unsigned int N_registros){
-    ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
+    ITEM_VENDA* iv = calloc(N_registros,sizeof(ITEM_VENDA));
 }
 
 BUFF* iv_Criar_S(char* arquivo_saida, unsigned int N_registros, FILE** retorno){
