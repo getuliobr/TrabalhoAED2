@@ -7,14 +7,13 @@
 static ITEM_VENDA* iv_Ler_Novo(unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = calloc(N_registros,sizeof(ITEM_VENDA));
     fread(iv, 1024, N_registros, *retorno);
-    // for(int i = 0; i < N_registros; i++)
-    //     printf("id = %d\n",iv[i].id);
     return iv;
 }
 
 BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
     BUFF* b = malloc(sizeof(BUFF));
+    printf("N_Registros: %d\n", N_registros);
 
 
     /*
@@ -46,22 +45,13 @@ BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno
 }
 
 ITEM_VENDA iv_Proximo(BUFF* buffer){
-    return buffer->iv[buffer->pos];
+    return buffer->iv[buffer->pos % buffer->tam];
 }
 
 ITEM_VENDA iv_Consumir(BUFF* buffer){
-
-
-    if(buffer->pos && ((buffer->pos % buffer->tam) == 0)){
-        printf("Antes\n");
-        for(int i = 0; i < 10; i++)
-            printf("id = %d\n",buffer->iv[i].id);
-        printf("pos = %d\t tam = %d\n",buffer->pos,buffer->tam);
+    if(buffer->pos && ((buffer->pos % buffer->tam) == 0)) {
         free(buffer->iv);   
         buffer->iv = iv_Ler_Novo(buffer->tam, buffer->arq);
-        printf("Depois\n");
-        for(int i = 0; i < 10; i++)
-            printf("id = %d\n",buffer->iv[i].id);
     }
     ITEM_VENDA  out = buffer->iv[buffer->pos++ % buffer->tam];
     return out;

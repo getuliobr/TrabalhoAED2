@@ -8,6 +8,7 @@
 #include "BufferSaida.h"
 #include "Tipos.h"
 #include "Utils.h"
+#include "Ordena.h"
 
 void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const char* saida){
     int i = 0;
@@ -78,8 +79,10 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
 
     for( i = 0; i < arq_ordenados_count; i++){                                              // Abertura de arquivos ordenados
         arq_entrada_ordenados[i] = NULL;                                                    // ^
+        printf("TAMANHO BRABOR: %d\n", tamanho_buffer_entrada_ordenado);
         arq_entrada_ord[i] = iv_Criar_E(arq_ordenados[i], tamanho_buffer_entrada_ordenado, &arq_entrada_ordenados[i]);   // ^
     }
+
     for(i = 0; i < 200; i++){ // Coloca os itens no arquivo
         int menor;                                          // Guarda o maior id de N Buffer lidos 
         ITEM_VENDA menor_iv;   // ^
@@ -92,8 +95,8 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
                 menor_iv = a;                                   // ^
             }                                                   // ^
         }                                                       // ^
-        // printf("menor = %d\tarq_entrada id proximo = %d\n",menor,arq_entrada_ord[menor]->iv[arq_entrada_ord[menor]->pos]);
         menor_iv = iv_Consumir(arq_entrada_ord[menor]);
+        printf("I: %d K: %d ID: %d\n", i, menor, menor_iv.id);
         iv_Inserir(arq_saida_p, menor_iv);
     }
     iv_Destruir_S(arq_saida_p); // Destruição da Saida
