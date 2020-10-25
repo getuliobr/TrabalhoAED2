@@ -25,7 +25,7 @@ typedef struct BUFF{
 * @param fp ponteiro para o arquivo
 * @return tamanho do arquivo em bytes
 */
-int fsize(FILE *fp);
+unsigned int fsize(FILE *fp);
 
 /**
 * @param arquivoentrada caminho para o arquivo de entrada

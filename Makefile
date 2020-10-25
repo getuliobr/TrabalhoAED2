@@ -13,6 +13,8 @@ Utils:
 
 Gerador:
 	gcc -g -c ./Modules/Gerador/big_file.c
+	gcc -g gerador.c -o gerador big_file.o
+	rm big_file.o
 
 teste:
 	gcc teste.c -o teste

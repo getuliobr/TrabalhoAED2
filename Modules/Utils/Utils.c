@@ -8,7 +8,7 @@
 #include "../BufferSaida/BufferSaida.h"
 #include "Utils.h"
 
-int fsize(FILE *fp) {
+unsigned int fsize(FILE *fp) {
   int prev = ftell(fp);
   fseek(fp, 0L, SEEK_END);
   int sz = ftell(fp);
@@ -28,6 +28,7 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
 
     unsigned int tamanhoDoArquivo = fsize(arq_principal);                                // E
     unsigned int quantidadeArquivos = ceil((double)tamanhoDoArquivo/B);                  // K
+    printf("quantidade de arquivos:%u\n", quantidadeArquivos);
     unsigned int quantidade_elementos_max = (tamanhoDoArquivo/quantidadeArquivos)/1024;  // Tamanho de cada arquivo temporário
 
     fclose(arq_principal);
@@ -36,7 +37,9 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
     char** arq_ordenados = calloc(sizeof(char*), quantidadeArquivos);           // Guarda nome dos arquivos já ordenados
     int arq_ordenados_count;                                                    // Guarda a quantidade de arquivos ordenados
 
-    while(1){
+
+    for(i = 0; i < quantidadeArquivos; i++) {
+        if(arq_principal != NULL && fsize(arq_principal) <= ftell(arq_principal)) break;
         BUFF* entrada = iv_Criar_E(arquivoentrada, quantidade_elementos_max, &arq_principal);
         if(feof(arq_principal)) break;                                                          // Condição de parada
         qsort(entrada->iv, quantidade_elementos_max, sizeof(ITEM_VENDA), compare);              // QuickSort pra ordenar o vetor do buffer 
@@ -51,7 +54,7 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
         FILE* novo = NULL;                                                                      // Referencia novo ponteiro de file
         BUFF* saida = iv_Criar_S(arqsaida, quantidade_elementos_max, &novo);                    // Cria um BUFFER de saida com o ponteiro e nome criados
         arq_ordenados[i] = arqsaida;
-        i++;
+
         arq_ordenados_count = i;
 
         free(saida->iv);                                                                        // Copia o Buffer de entrada já ordenado, o tamanho e posição
@@ -60,7 +63,6 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
         iv_Despejar(saida);                                                                     // Despeja
         
         iv_Destruir_S(saida);                                                                  // Destroi a saida
-        free(entrada->arq);                                                                    // Limpa o ponteiro de arquivo da entrada
         free(entrada);                                                                         // Limpa a entrada
     };
     
@@ -94,7 +96,10 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
                 menor = k;                                   
                 menor_iv = a;                                
             }                                                
-        }                                        
+        }
+        if(i == 786431) {
+            int amlk = 1;
+        }                                
         menor_iv = iv_Consumir(arq_entrada_ord[menor]);         // Consome o menor arquivo
         iv_Inserir(arq_saida_p, menor_iv);                      // Insere o menor arquivo no buffer de saida
     }
