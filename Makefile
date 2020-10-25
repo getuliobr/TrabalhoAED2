@@ -1,4 +1,4 @@
-all: BufferEntrada BufferSaida Utils
+all: BufferEntrada BufferSaida Utils Gerador
 	gcc -g main.c -o main *.o
 	rm *.o
 	
@@ -11,8 +11,8 @@ BufferSaida:
 Utils:
 	gcc -g -c ./Modules/Utils/Utils.c
 
-gerar:
-	gcc -g ./Modules/Gerador/*.c -o gerar_arquivo
+Gerador:
+	gcc -g -c ./Modules/Gerador/big_file.c
 
 teste:
 	gcc teste.c -o teste

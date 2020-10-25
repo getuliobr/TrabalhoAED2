@@ -37,7 +37,7 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
     int arq_ordenados_count;                                                    // Guarda a quantidade de arquivos ordenados
 
     while(1){
-        BUFF* entrada = iv_Criar_E("teste.dat", quantidade_elementos_max, &arq_principal);
+        BUFF* entrada = iv_Criar_E(arquivoentrada, quantidade_elementos_max, &arq_principal);
         if(feof(arq_principal)) break;                                                          // Condição de parada
         qsort(entrada->iv, quantidade_elementos_max, sizeof(ITEM_VENDA), compare);              // QuickSort pra ordenar o vetor do buffer 
 

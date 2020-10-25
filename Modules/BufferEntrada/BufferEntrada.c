@@ -9,7 +9,7 @@ static ITEM_VENDA* iv_Ler_Novo(unsigned int N_registros, FILE** retorno){
     return iv;
 }
 
-BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno){
+BUFF* iv_Criar_E(const char* arquivo_entrada ,unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
     BUFF* b = malloc(sizeof(BUFF));
 
