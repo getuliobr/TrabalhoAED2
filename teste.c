@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Tipos.h"
+#include "./Modules/Utils/Utils.h"
 
 int main(int argc, char* argv[]) {
   FILE* f = fopen(argv[1],"rb+");

@@ -23,6 +23,6 @@ Operações necessárias:
 
 ## Fluxo de dados
 Com esses dois TADs será possivel seguir o seguinte fluxo de dados:
-![era para ter uma imagem de um fluxo de dados aqui](imagens/figura.png)
+![era para ter uma imagem de um fluxo de dados aqui](Imagens/figura.png)
 
 Para ordernar os primeiros arquivos utilizamos do algoritmo de ordenação _QuickSort_, e para intercalar em K-Vias utilizamos o _MergeSort_.
