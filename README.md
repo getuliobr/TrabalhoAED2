@@ -21,6 +21,7 @@ Operações necessárias:
 - **Vazio**: Retorna 1 ou 0, dependendo se todos os registros já foram consumidos pela função consumir.
 - **Destruir**: fecha o arquivo e desaloca as variáveis.
 
+## Fluxo de dados
 Com esses dois TADs será possivel seguir o seguinte fluxo de dados:
 ![era para ter uma imagem de um fluxo de dados aqui](imagens/figura.png)
 
