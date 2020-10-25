@@ -43,8 +43,8 @@ void gerar_array_iv(const char* arquivo_saida, unsigned int n_registros, int see
     }
 
     embaralhar(iv, 0, n_registros);
-    for(i = 0; i < n_registros; i++)
-        printf("id = %u, id_venda = %u, desconto = %.2f, data: %u\n", iv[i].id, iv[i].id_venda, iv[i].desconto, iv[i].data);
+    // for(i = 0; i < n_registros; i++)
+        // printf("id = %u, id_venda = %u, desconto = %.2f, data: %u\n", iv[i].id, iv[i].id_venda, iv[i].desconto, iv[i].data);
     saida = fopen(arquivo_saida, "wb");
     if(saida == NULL){
         perror("Erro");
