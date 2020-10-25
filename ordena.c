@@ -8,23 +8,23 @@
 #include "Tipos.h"
 #include "Utils.h"
 
-void ordena(const char* arquivoentrada,unsigned int B,unsigned int S, const char* saida){
+void ordena(const char* arquivoentrada, int B, int S, const char* saida){
     int i = 0;
     int j, k;
-    int max_itens = B/1024;
     /*
     1ª Parte:
     Abrir um arquivo, ordernar de X em Xmb e criar um vários arquivos menores de Xmb
     Obs: Antes de salvar já faz a ordenação
     */
     FILE* arq_principal = fopen(arquivoentrada, "rb+");
-    unsigned int tamanhoDoArquivo = fsize(arq_principal);
-    int qtdeElementos = ceil(tamanhoDoArquivo / B);
+    int tamanhoDoArquivo = fsize(arq_principal);
+    int qtdeElementos = tamanhoDoArquivo / 1024;
+    int quantidadeArquivos = qtdeElementos / 10;
     fclose(arq_principal);
     arq_principal = NULL;
 
-    char** arq_ordenados = calloc(sizeof(char*), qtdeElementos); // Guarda nome dos arquivos já ordenados
-    int arq_ordenados_count;                                    // Guarda a quantidade de arquivos ordenados
+    char** arq_ordenados = calloc(sizeof(char*), quantidadeArquivos); // Guarda nome dos arquivos já ordenados
+    int arq_ordenados_count;                            // Guarda a quantidade de arquivos ordenados
 
     while(1){
         BUFF* entrada = iv_Criar_E("teste.dat", 10, &arq_principal);
@@ -56,21 +56,20 @@ void ordena(const char* arquivoentrada,unsigned int B,unsigned int S, const char
     Criar um novo arquivo e vai colocando de N em N MB fazendo o mergeSort
     Obs: O Buffer vai se atualizando sozinho
     */
-   unsigned int tamanho_buffer_saida = ceil(S/1024);
     FILE* arq_saida_principal = NULL;                                           // FILE do arquivo de saida principal(Todos os elementos ordenados)
-    BUFF* arq_saida_p = iv_Criar_S(saida, tamanho_buffer_saida, &arq_saida_principal);      // Criação do Buffer de saida principal
+    BUFF* arq_saida_p = iv_Criar_S(saida, 10, &arq_saida_principal);      // Criação do Buffer de saida principal
 
     FILE** arq_entrada_ordenados = malloc(sizeof(FILE*)*arq_ordenados_count);   // Vetor de FILES dos arquivos já ordenados
-    BUFF** arq_entrada_ord = malloc(sizeof(BUFF*)*arq_ordenados_count);
-    
+    BUFF** arq_entrada_ord = malloc(sizeof(BUFF*)*arq_ordenados_count);         // Vetor de Buffers dos arquivos já ordenados
+
     for( i = 0; i < arq_ordenados_count; i++){                                              // Abertura de arquivos ordenados
         arq_entrada_ordenados[i] = NULL;                                                    // ^
         arq_entrada_ord[i] = iv_Criar_E(arq_ordenados[i], 10, &arq_entrada_ordenados[i]);   // ^
     }
-    for(i = 0; i < (tamanhoDoArquivo/1024)/*Quantidade de elementos a ser salvos*/; i++){ // Coloca os itens no arquivo
+    for(i = 0; i < 100/*tamanho de elementos no arquivo*/; i++){ // Coloca os itens no arquivo
         int menor;                                          // Guarda o maior id de N Buffer lidos 
         ITEM_VENDA menor_iv;   // ^
-        menor_iv.id = (tamanhoDoArquivo/1024)+42;
+        menor_iv.id = 100+20;
         for(k = 0; k < arq_ordenados_count; k++){               // ^
             if(iv_Vazio(arq_entrada_ord[k])) continue;
             ITEM_VENDA a = iv_Proximo(arq_entrada_ord[k]);      // ^
@@ -86,6 +85,6 @@ void ordena(const char* arquivoentrada,unsigned int B,unsigned int S, const char
 
     for(i = 0; i < arq_ordenados_count; i++){    // Destruição dos arquivos de entrada
         iv_Destruir_E(arq_entrada_ord[i]);       // ^      
-        remove(arq_ordenados[i]);                // ^
+        // remove(arq_ordenados[i]);                // ^
     }                                            // ^
-}
+} 
