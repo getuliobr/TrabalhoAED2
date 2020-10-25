@@ -5,7 +5,7 @@
   "tasks": [
       {
           "label": "gcc build active file",
-          "type": "shell",
+          // "type": "shell",
           "command": "make"
       }
   ]

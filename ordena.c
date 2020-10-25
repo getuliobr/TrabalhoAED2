@@ -23,8 +23,6 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
     int tamanhoDoArquivo = fsize(arq_principal);       // E
     int quantidadeArquivos = ceil(tamanhoDoArquivo/B); // K
     int quantidade_elementos_max = (tamanhoDoArquivo/quantidadeArquivos)/1024; // Tamanho de cada arquivo temporário
-    printf("E = %d\t K = %d\t Tamanho de cada arquivo: %d\n",tamanhoDoArquivo, quantidadeArquivos, quantidade_elementos_max);
-
 
     fclose(arq_principal);
     arq_principal = NULL;
@@ -67,10 +65,6 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
     int tamanho_buffer_saida = S/1024; // Tamanho do buffer de saida
     int tamanho_buffer_entrada_ordenado = floor(((B-S)/quantidadeArquivos)/1024);// Tamanho buffer da entrada dos ordenados
 
-    printf("Qtde elementos = %d\n",qtdeElementos);
-    printf("Buffer saida = %d\t Buffer Entrada = %d\n",tamanho_buffer_saida,tamanho_buffer_entrada_ordenado);
-    printf("arq_ord_count  = %d\n", arq_ordenados_count);
-
     FILE* arq_saida_principal = NULL;                                           // FILE do arquivo de saida principal(Todos os elementos ordenados)
     BUFF* arq_saida_p = iv_Criar_S(saida, tamanho_buffer_saida, &arq_saida_principal);      // Criação do Buffer de saida principal
 
@@ -79,11 +73,10 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
 
     for( i = 0; i < arq_ordenados_count; i++){                                              // Abertura de arquivos ordenados
         arq_entrada_ordenados[i] = NULL;                                                    // ^
-        printf("TAMANHO BRABOR: %d\n", tamanho_buffer_entrada_ordenado);
         arq_entrada_ord[i] = iv_Criar_E(arq_ordenados[i], tamanho_buffer_entrada_ordenado, &arq_entrada_ordenados[i]);   // ^
     }
 
-    for(i = 0; i < 200; i++){ // Coloca os itens no arquivo
+    for(i = 0; i < qtdeElementos; i++){ // Coloca os itens no arquivo
         int menor;                                          // Guarda o maior id de N Buffer lidos 
         ITEM_VENDA menor_iv;   // ^
         menor_iv.id = qtdeElementos+42;
@@ -96,7 +89,6 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
             }                                                   // ^
         }                                                       // ^
         menor_iv = iv_Consumir(arq_entrada_ord[menor]);
-        printf("I: %d K: %d ID: %d\n", i, menor, menor_iv.id);
         iv_Inserir(arq_saida_p, menor_iv);
     }
     iv_Destruir_S(arq_saida_p); // Destruição da Saida

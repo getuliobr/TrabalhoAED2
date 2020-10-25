@@ -13,7 +13,6 @@ static ITEM_VENDA* iv_Ler_Novo(unsigned int N_registros, FILE** retorno){
 BUFF* iv_Criar_E(char* arquivo_entrada ,unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = malloc(sizeof(ITEM_VENDA)*N_registros);
     BUFF* b = malloc(sizeof(BUFF));
-    printf("N_Registros: %d\n", N_registros);
 
 
     /*
@@ -49,11 +48,11 @@ ITEM_VENDA iv_Proximo(BUFF* buffer){
 }
 
 ITEM_VENDA iv_Consumir(BUFF* buffer){
+    ITEM_VENDA out = buffer->iv[buffer->pos++ % buffer->tam];
     if(buffer->pos && ((buffer->pos % buffer->tam) == 0)) {
         free(buffer->iv);   
         buffer->iv = iv_Ler_Novo(buffer->tam, buffer->arq);
     }
-    ITEM_VENDA  out = buffer->iv[buffer->pos++ % buffer->tam];
     return out;
 }
 
