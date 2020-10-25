@@ -4,9 +4,8 @@
 #include <string.h>
 #include <limits.h>
 #include <math.h>
-#include "BufferEntrada.h"
-#include "BufferSaida.h"
-#include "Tipos.h"
+#include "../BufferEntrada/BufferEntrada.h"
+#include "../BufferSaida/BufferSaida.h"
 #include "Utils.h"
 
 int fsize(FILE *fp) {

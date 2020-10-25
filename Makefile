@@ -3,13 +3,13 @@ all: BufferEntrada BufferSaida Utils
 	rm *.o
 	
 BufferEntrada:
-	gcc -g -c BufferEntrada.c
+	gcc -g -c ./modules/BufferEntrada/BufferEntrada.c
 
 BufferSaida:
-	gcc -g -c BufferSaida.c
+	gcc -g -c ./modules/BufferSaida/BufferSaida.c
 
 Utils:
-	gcc -g -c Utils.c
+	gcc -g -c ./modules/Utils/Utils.c
 
 teste:
 	gcc teste.c -o teste

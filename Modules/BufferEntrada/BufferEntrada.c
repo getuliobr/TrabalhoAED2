@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "BufferEntrada.h"
-#include "Utils.h"
 
 static ITEM_VENDA* iv_Ler_Novo(unsigned int N_registros, FILE** retorno){
     ITEM_VENDA* iv = calloc(N_registros,sizeof(ITEM_VENDA));
