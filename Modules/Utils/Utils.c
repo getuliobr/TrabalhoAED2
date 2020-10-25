@@ -96,10 +96,7 @@ void ordena(const char* arquivoentrada, unsigned int B, unsigned int S, const ch
                 menor = k;                                   
                 menor_iv = a;                                
             }                                                
-        }
-        if(i == 786431) {
-            int amlk = 1;
-        }                                
+        }                             
         menor_iv = iv_Consumir(arq_entrada_ord[menor]);         // Consome o menor arquivo
         iv_Inserir(arq_saida_p, menor_iv);                      // Insere o menor arquivo no buffer de saida
     }
