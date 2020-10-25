@@ -54,3 +54,5 @@ dkms.conf
 #Arquivos de Saida
 arqsaida*
 *.dat
+*.pdf
+*.zip
